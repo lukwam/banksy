@@ -12,5 +12,6 @@ steps:
       - --region=us-east4
       - --runtime=python39
       - --timeout=30
+      - --trigger-event=google.storage.object.finalize
       - --trigger-resource=${_INCOMING_BUCKET}
       - -q
