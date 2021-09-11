@@ -12,6 +12,5 @@ steps:
       - --region=us-east4
       - --runtime=python39
       - --timeout=30
-      - --trigger-resource=${INCOMING_BUCKET}
-      - --vpc-connector=broad-vpc-us-east4
+      - --trigger-resource=${_INCOMING_BUCKET}
       - -q

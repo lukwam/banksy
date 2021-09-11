@@ -1,8 +1,8 @@
-resource "google_cloudbuild_trigger" "deploy-process-incoming-images-function" {
+resource "google_cloudbuild_trigger" "deploy-process-incoming-image-function" {
   provider       = google-beta
-  name           = "deploy-process-incoming-images-function"
-  description    = "Deploy process_incoming_images Function"
-  filename       = "functions/process_incoming_images/cloudbuild.yaml"
+  name           = "deploy-process-incoming-image-function"
+  description    = "Deploy process_incoming_image Function"
+  filename       = "functions/process_incoming_image/cloudbuild.yaml"
   project        = var.project_id
 
   github {
@@ -14,12 +14,12 @@ resource "google_cloudbuild_trigger" "deploy-process-incoming-images-function" {
   }
 
   included_files = [
-    "functions/process_incoming_images/**",
+    "functions/process_incoming_image/**",
   ]
 
   ignored_files = [
-    "functions/process_incoming_images/*.md",
-    "functions/process_incoming_images/*.sh",
+    "functions/process_incoming_image/*.md",
+    "functions/process_incoming_image/*.sh",
   ]
 
   substitutions = {
