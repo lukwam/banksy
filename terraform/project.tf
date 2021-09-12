@@ -14,6 +14,7 @@ resource "google_project" "project" {
 
 resource "google_project_service" "services" {
   for_each = toset([
+    "appengine.googleapis.com",
     "cloudbuild.googleapis.com",
     "cloudfunctions.googleapis.com",
     "cloudresourcemanager.googleapis.com",
@@ -29,6 +30,7 @@ resource "google_project_service" "services" {
 
 resource "google_project_iam_member" "cloudbuild" {
   for_each = toset([
+    "roles/appengine.appAdmin",
     "roles/cloudfunctions.developer",
     "roles/cloudbuild.builds.builder",
     "roles/iam.serviceAccountUser",
