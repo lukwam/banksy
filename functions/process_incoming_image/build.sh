@@ -1,3 +1,5 @@
 #!/bin/bash
 
-pack build process_incoming_image --builder gcr.io/buildpacks/builder
+. ./config.sh
+
+pack build "${IMAGE}" --builder gcr.io/buildpacks/builder

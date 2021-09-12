@@ -33,6 +33,7 @@ def save_to_firestore(blob):
     labels = blob.metadata.get("labels") if blob.metadata else "None"
     label_annotations = blob.metadata.get("label_annotations") if blob.metadata else "None"
     ref.set({
+        "blob_id": doc_id,
         "bucket": blob.bucket.name,
         "content_type": blob.content_type,
         "crc32c": blob.crc32c,

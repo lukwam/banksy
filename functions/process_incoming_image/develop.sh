@@ -7,4 +7,4 @@ docker run -it --rm \
     -w "/workspace" \
     -v "$(pwd):/workspace" \
     -v "${ETC_DIR}/service_account.json:/etc/service_account.json" \
-    "${FUNCTION}"
+    "${IMAGE}"
