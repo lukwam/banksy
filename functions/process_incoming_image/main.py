@@ -75,7 +75,7 @@ if __name__ == "__main__":
         event_type = "OBJECT_FINALIZE"
     event = {
         "bucket": "lukwam-banksy-incoming",
-        "name": "Bristol-Totterdown2400.jpeg",
+        "name": "Bristol-Totterdown2400.jpg",
         "metageneration": "123456",
         "timeCreated": "2021-01-15T01:30:15.01Z",
         "updated": "",

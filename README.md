@@ -1,2 +1,2 @@
-# banksy-not-banksy
+# banksy
 Banksy? or Not Banksy?
