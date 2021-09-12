@@ -1,0 +1,26 @@
+<h1 class="text-center p-3">Lukwam - Banksy</h1>
+
+<div class="text-center">
+  <img src="{{ url }}" class="img-fluid" alt="{{ image.object_name }}">
+</div>
+
+<div class="container-fluid row p-3 align-items-center">
+  {% if not first %}<a class="col-1 text-center" href="/?start_before={{ image.blob_id }}">
+    <i class="bi-chevron-left"></i></a>
+  {% else %}<span class="col-1 text-center"><i class="bi-stop"></i></span>{% endif %}
+  <button type="button" class="btn btn-danger btn-lg col-5">Not Banksy</button>
+  <button type="button" class="btn btn-success btn-lg col-5">Banksy</button>
+  <a class="col-1 text-center" href="/?start_after={{ image.blob_id }}">
+    <i class="bi-chevron-right"></i></a>
+</div>
+
+<table class="table table-bordered table-sm">
+  <tr>
+    <th>Name</th>
+    <td>{{ image.object_name }}</td>
+  </tr>
+  <tr>
+    <th>Labels</th>
+    <td>{% for label in image.labels %}{{ label }}<br>{% endfor %}</td>
+  </tr>
+</table>
