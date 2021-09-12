@@ -27,7 +27,7 @@ def detect_label_annotations(uri):
 def save_to_firestore(blob):
     """Save information about a blob to firestore."""
     client = firestore.Client()
-    collection = "images"
+    collection = "incoming"
     doc_id = blob.id.split("/")[-1]
     ref = client.collection(collection).document(doc_id)
     labels = blob.metadata.get("labels") if blob.metadata else "None"

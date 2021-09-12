@@ -8,8 +8,10 @@
   {% if not first %}<a class="col-1 text-center" href="/?start_before={{ image.blob_id }}">
     <i class="bi-chevron-left"></i></a>
   {% else %}<span class="col-1 text-center"><i class="bi-stop"></i></span>{% endif %}
-  <button type="button" class="btn btn-danger btn-lg col-5">Not Banksy</button>
-  <button type="button" class="btn btn-success btn-lg col-5">Banksy</button>
+
+  <a href="/notbanksy/{{ image.blob_id }}" class="btn btn-danger btn-lg col-5">Not Banksy</a>
+  <a href="/banksy/{{ image.blob_id }}" class="btn btn-success btn-lg col-5">Banksy</a>
+
   <a class="col-1 text-center" href="/?start_after={{ image.blob_id }}">
     <i class="bi-chevron-right"></i></a>
 </div>
