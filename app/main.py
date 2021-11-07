@@ -1,4 +1,5 @@
 """Banksy app."""
+import json
 from datetime import timedelta
 from flask import Flask
 from flask import redirect
@@ -97,20 +98,49 @@ def hello():
 
 @app.route('/banksy/<blob_id>')
 def banksy(blob_id):
-    """Confirm an image as Banksy."""
-    bucket = "lukwam-banksy-confirmed"
+    """Confirm an incoming image as Banksy."""
+    dest_bucket_name = "lukwam-banksy-confirmed"
+    dest_object_name = f"{blob_id}.jpg"
 
-    # get the firestore record
-    image_doc = firestore.Client().collection("images").document(blob_id).get()
-    print(image_doc.to_dict())
+    # get the incoming firestore record
+    client = firestore.Client()
+    incoming_ref = client.collection("incoming").document(blob_id)
+    incoming = incoming_ref.get().to_dict()
+    bucket_name = incoming["bucket"]
+    object_name = incoming["object_name"]
 
     # copy the blob to the banksy bucket
+    blob = copy_object(
+        bucket_name,
+        object_name,
+        dest_bucket_name,
+        dest_object_name
+    )
 
     # create the new firestore record
+    banksy_id = blob.id.split("/")[-1]
+    data = {
+        "id": banksy_id,
+        "banksy": True,
+        "bucket": blob.bucket.name,
+        "content_type": blob.content_type,
+        "crc32c": blob.crc32c,
+        "labels": incoming["labels"],
+        "label_annotations": incoming["label_annotations"],
+        "md5_hash": blob.md5_hash,
+        "object_name": blob.name,
+        "size": blob.size,
+        "storage_class": blob.storage_class,
+        "time_created": blob.time_created,
+        "uri": f"gs://{blob.bucket.name}/{blob.name}",
+    }
+    client.collection("banksy").document(banksy_id).set(data)
 
     # delete the old image
+    delete_object(bucket_name, object_name)
 
     # delete the old firestore record
+    incoming_ref.delete()
 
     return redirect(f"/?start_after={blob_id}")
 
